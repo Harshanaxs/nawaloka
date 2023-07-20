@@ -1,9 +1,8 @@
-# Stage 1
-FROM node:14.15.4 as node
+FROM node:16-alpine AS build
 WORKDIR /app
-COPY . .
+COPY package*.json ./
 RUN npm install
-RUN npm run build --prod
-# Stage 2
-FROM nginx:alpine
-COPY --from=node /app/dist/angular-app /usr/share/nginx/html
+COPY . .
+RUN npm run build
+EXPOSE 4200
+CMD ["npm", "start"]
