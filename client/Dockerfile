@@ -4,7 +4,5 @@ WORKDIR /app
 COPY . .
 RUN npm install
 RUN npm run start
-# Serve Application using Nginx Server
-FROM nginx:alpine
-COPY --from=build /app/dist/project-name/ /usr/share/nginx/html
-EXPOSE 80
+
+EXPOSE 4200
